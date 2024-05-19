@@ -1,0 +1,90 @@
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+
+namespace OOPJava_TX2_1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string b;
+            List<IEmployee> Fulltime = new List<IEmployee>();
+            Fulltime.Add(new FullTimeEmployee("Viet Bui",500));
+            Fulltime.Add(new FullTimeEmployee("Phong Luu", 300));
+            Fulltime.Add(new FullTimeEmployee("Chien Nguyen", 100));
+            List<IEmployee> Parttime = new List<IEmployee>();
+            Parttime.Add(new PartTimeEmployee("Linh Luu",100,4));
+            Parttime.Add(new PartTimeEmployee("Ha Phuong", 200, 1));
+
+            string[] A = new string[]
+            {"1. Highest Salary Employee Parttime" +
+             "\n2. Highest Salary Employee Fulltime" +
+             "\n3. Find Employee from Name "
+            };
+            Console.WriteLine("Menu");
+            for (int i = 0; i < A.Length; i++)
+            {
+                Console.WriteLine(A[i]);
+            }
+            Console.WriteLine("Enter your choice : ");
+            b = Console.ReadLine();
+            switch (b) 
+            {
+                case "1":
+                    IEmployee a = FindMaxSalary1(Parttime);
+                    Console.WriteLine("The Highest Salary Parttime Employee :" + a.ToString());
+                    break; 
+
+                case "2":
+                    IEmployee FEmploy = FindMaxSalary1(Fulltime);
+                    Console.WriteLine("The Highest Salary Fulltime Employee :" + FEmploy.ToString());
+                    break;
+
+                case "3":
+                    Console.WriteLine("Enter Name You Wanna Find : ");
+                    string c = Console.ReadLine();
+                    List<IEmployee> e = new List<IEmployee>();
+                    e = FindEmployee(c, Parttime,Fulltime);
+                    for (int i = 0; i < e.Count; i++)
+                    {
+                        Console.WriteLine(e[i].ToString());
+                    }
+                    break;
+            };
+        }
+        
+        public static IEmployee FindMaxSalary1(List<IEmployee> list)
+        {
+            IEmployee x = list[0];
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list[i].CalculateSalary()>x.CalculateSalary())
+                {
+                    x = list[i];
+                }
+            }
+            return x;
+        }
+
+        public static List<IEmployee> FindEmployee(string c, List<IEmployee>list1,List<IEmployee>list2)
+        {
+            List<IEmployee> employees = new List<IEmployee>();  
+
+            for (int i = 0; i < list1.Count; i++)
+            {
+                if (list1[i].getName().Contains(c)) 
+                {
+                    employees.Add(list1[i]);
+                }
+            }
+            for (int i = 0; i < list2.Count; i++)
+            {
+                if (list2[i].getName().Contains(c))
+                {
+                    employees.Add(list2[i]);
+                }
+            }
+            return employees;  
+        }
+    }
+}
