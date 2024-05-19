@@ -1,0 +1,44 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPJava_TX2_1
+{
+    public abstract class Employee : IEmployee
+    {
+        public string name;
+        private int paymentPerHours;
+        public Employee(string name, int paymentPerHours) 
+        {
+            this.name = name;
+            this.paymentPerHours = paymentPerHours;
+        }
+        
+        public void setName(string name)
+        {
+            this.name = name;
+        }
+        string IEmployee.getName()
+        {
+            return this.name;
+        }
+        public void setPaymentPerHour(int paymentPerHours)
+        {
+            this.paymentPerHours = paymentPerHours;
+        }
+        public int getPaymentPerHours() 
+        { 
+            return paymentPerHours;
+        }
+        public abstract int CalculateSalary();
+
+        public override string ToString()
+        {
+            return "Name : " + name + " Payment Per Hours : " + paymentPerHours;
+        }
+
+        
+    }
+}
