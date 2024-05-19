@@ -1,0 +1,24 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OOPJava_TX2_1
+{
+    public class FullTimeEmployee : Employee
+    {
+        public FullTimeEmployee(string name, int paymentPerHours) : base(name, paymentPerHours)
+        {
+        }
+        public override int CalculateSalary()
+        {
+            return  8*getPaymentPerHours();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + " Working Per Hours : 8";
+        }
+    }
+}
